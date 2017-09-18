@@ -1,0 +1,16 @@
+---
+help:
+  - '/rg и /arp help - эта страница'
+  - '/rg <pos1/pos2> - выбрать позицию'
+  - '/rg create <region> - создать регион'
+  - '/rg <delete/remove> <region> - удалить регион'
+  - '/rg flags <region> - флаги региона'
+  - '/rg flag <region> <flag> <allow/deny> - изменить флаг'
+  - '/rg addmember <region> <nickname> - добавить в регион'
+  - '/rg <removemember/deletemember/delmember> <region> <nickname> - удалить из региона'
+  - '/rg <addowner> <region> <nickname> - добавить владельца'
+  - '/rg <removeowner/deleteowner/delowner> <region> <nickname> - удалить владельца'
+  - '/rg up <count> - Поднять регион'
+  - '/rg down <count> - Опустить регион'
+  - '/rg list - список регионов'
+...

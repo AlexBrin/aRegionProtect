@@ -1,0 +1,100 @@
+---
+messages:
+  prefix: '§7[§fa§aRegionProtect§7] §r'
+  point: 'Точка %var0% выбрана: %var1% %var2% %var3%'
+  rgNotEx: 'Регион %var0% не существует'
+  rgEx: 'Регион %var0% уже существует'
+  notOwner: 'Это не твой регион'
+  sign:
+    success: 'Регион %var0% выставлен на продажу за %var1%'
+    line1: '[SELL]' # что будет на первой линии
+    line2: '{rgname}'
+    line3: 'Цена:'
+    line4: '{price}' # Это не трогать
+    sell:
+      money: 'Недостаточно денег'
+      selled: 'Регион %var0% успешно куплен за %var1%'
+  list:
+    title: 'Твои регионы:'
+    line: '%var0% (в мире %var1%)'
+    glue: ', ' # как разделять. \n перенесет на новую строку
+  info:
+    title: 'Информация о регионе %var0%:'
+    info: '%var0%: %var1%'
+    glue: ', ' # Как разделять флаги при выводе
+  create:
+    pos: 'Сначала нужно выделить 2 точки'
+    size: 'Регион слишком большой! Тебе можно %var0%, а у тебя %var1% (разница %var2%)'
+    count: 'У тебя достигнут лимит регионов (%var0%)'
+    intersects: 'Регион пересекает границу другого региона'
+    success: 'Регион %var0% создан'
+  delete:
+    success: 'Регион %var0% успешно удален'
+  flag:
+    update: 'Флаг %var0% региона %var1% обновлен: %var2%'
+    title: 'Флаги региона %var0%:'
+    info: '%var0%: %var1%'
+  member:
+    add: 'Игрок %var0% добавлен в регион %var1%'
+    remove: 'Игрок %var0% удален из региона %var1%'
+  owner:
+    add: 'Игрок %var0% добавлен как совладелец в регион %var1%'
+    remove: 'Игрок %var0% удален регион %var1%'
+  position:
+    select: 'Позиция %var0% выбрана: %var1% %var2% %var3%'
+  up:
+    success: 'Регион поднят на %var0%. Новый размер: %var1%'
+    pos: 'Сначала нужно выделить 2 точки'
+  down:
+    success: 'Регион опущен на %var0%. Новый размер: %var1%'
+    minimum: 'Самая низкая точка не может быть меньше 0'
+  event:
+    build:
+      deny: 'Тебе запрещено тут строить'
+    move:
+      inRegion:
+        title: '§aДобро пожаловать'
+        success: 'Ты вошел в регион %var0%'
+        fail: 'Тебе нельзя в этот регион :('
+      outRegion:
+        title: '§aЗаходи еще :)'
+        success: 'Ты вышел из региона %var0%'
+    pvp:
+      deny: 'Тут нельзя драться'
+    interact:
+      deny: 'Тут нельзя этого делать'
+    cmd:
+      deny: 'Тут нельзя использовать команды'
+  use: # Подсказки при неправильном вводе
+      create: '§eИспользование: /rg create <region>'
+      delete: '§eИспользование: /rg <delete/remove> <region>'
+      flag: '§eИспользование: /rg flag <region> <flag> <allow/deny>'
+      flags: '§eИспользование: /rg flags <region>'
+      addMember: '§eИспользование: /rg addmember <region> <nickname>'
+      removeMember: '§eИспользование: /rg <deletemember/delmember/removemember> <region> <nickname>'
+      addOwner: '§eИспользование: /rg <addowner> <region> <nickname>'
+      removeOwner: '§eИспользование: /rg <removeowner/deleteowner/delowner> <region> <nickname>'
+      up: '§eИспользование: /rg up <count>'
+      down: '§eИспользование: /rg down <count>'
+
+params:
+  sell:
+    line1: '[sellrg]' # Что должно быть на первой строке
+  info:
+    id: 280 # Каким предметом можно проверить регион
+  move:
+    in: true # Писать ли сообщения при входе в регион
+    out: true # Писать ли сообщения при выходе из региона
+    title: true # Если true - будет использоваться заголовок. Иначе сообщение в чат
+  perms: # Права. Указывать в PurePerms или подобном
+    size: # Обязательно в порядке увеличения
+      - arp.region.size.10000
+      - arp.region.size.100000
+      - arp.region.size.1000000
+      - arp.region.size.unlim # Бесконечно
+    count: # Обязательно в порядке увеличения
+      - arp.region.count.1
+      - arp.region.count.3
+      - arp.region.count.5
+      - arp.region.count.unlim # Бесконечно
+...
