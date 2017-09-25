@@ -8,6 +8,7 @@ use AlexBrin\utils\Region;
 use pocketmine\level\Level;
 use pocketmine\level\Position;
 use pocketmine\math\Vector3;
+use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 
@@ -28,6 +29,8 @@ class RegionProtect extends PluginBase implements Listener {
 	/* @var EconomyManager $eco */
 	private $eco;
 
+	public static $pmmp = false;
+
 	public function onEnable() {
 		$f = $this->getDataFolder();
 		if(!is_dir($f))
@@ -38,6 +41,9 @@ class RegionProtect extends PluginBase implements Listener {
         $this->prefix = $this->config->getNested('messages.prefix');
 		$this->regions = new Config($f.'regions.json', Config::JSON);
 		$this->eco = new EconomyManager($this);
+
+		if(method_exists("\pocketmine\Player", 'addTitle'))
+		    self::$pmmp = true;
 
 		self::$instance = $this;
 
@@ -157,6 +163,13 @@ class RegionProtect extends PluginBase implements Listener {
      */
     public function getParam($node, $default = null) {
         return $this->config->getNested("params.$node", $default);
+    }
+
+    public static function sendTitle(Player $player, $title, $subtitle) {
+        if(self::$pmmp)
+            $player->addTitle($title, $subtitle);
+        else
+            $player->sendTitle($title, $subtitle);
     }
 
 }

@@ -31,10 +31,10 @@ class EventListener implements Listener {
 
     private $inRegion = [];
 
-    public static $blocks = [
-        BlockIds::DOOR_BLOCK,
-        BlockIds::CHEST,
-    ];
+//    public static $blocks = [
+//        BlockIds::DOOR_BLOCK,
+//        BlockIds::CHEST,
+//    ];
 
     public function __construct(RegionProtect &$plugin) {
         $this->plugin = $plugin;
@@ -66,7 +66,8 @@ class EventListener implements Listener {
                     return;
                 if($this->getParam('move.out')) {
                     if($this->getParam('move.title'))
-                        $player->sendTitle(
+                        RegionProtect::sendTitle(
+                            $player,
                             $this->getMessage('event.move.outRegion.title', [], false),
                             $this->getMessage('event.move.outRegion.success', [$this->inRegion[$nickname]], false)
                         );
@@ -94,7 +95,8 @@ class EventListener implements Listener {
                 if($ev->isCancelled())
                     return;
                 if($this->getParam('move.title'))
-                    $player->sendTitle(
+                    RegionProtect::sendTitle(
+                        $player,
                         $this->getMessage('event.move.inRegion.title', [], false),
                         $this->getMessage('event.move.inRegion.success', [$region->getName()], false)
                     );
@@ -161,6 +163,9 @@ class EventListener implements Listener {
             return;
         }
 
+        if($region->isOwner($player) || $region->isMember($player))
+            return;
+
         switch($block->getId()) {
 
             case BlockIds::SIGN_POST:
@@ -211,7 +216,7 @@ class EventListener implements Listener {
                     }
                 break;
 
-            case BlockIds::DOOR_BLOCK:
+            case 64:
                     if(!$this->hasPermission($region, $player, 'door')) {
                         $event->setCancelled(true);
                         $player->sendMessage($this->getMessage('event.interact.deny'));
